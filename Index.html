@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniVert - The #1 Hub For Clipping</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Kanit', sans-serif; background-color: #0f172a; color: white; }
+        .job-card:hover { transform: translateY(-5px); transition: 0.3s; }
+    </style>
+</head>
+<body class="p-6">
+
+    <div class="max-w-4xl mx-auto mt-10 text-center">
+        <h1 class="text-5xl font-bold text-blue-400 mb-2">OmniVert Hub</h1>
+        <p class="text-gray-400 text-lg">แหล่งรวมงานตัดคลิปสั้น รับงานง่าย ได้เงินชัวร์</p>
+    </div>
+
+    <div class="max-w-4xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div class="bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700 job-card relative overflow-hidden">
+            <div class="absolute top-0 right-0 bg-green-500 text-xs font-bold px-3 py-1 rounded-bl-lg">ว่าง (Available)</div>
+            <h2 class="text-2xl font-semibold mb-2 mt-2">ตัดไฮไลท์ โค้ช A (สอนธุรกิจ)</h2>
+            <p class="text-gray-400 text-sm mb-4">บรีฟ: ตัดคลิป 1 นาที ซับไตเติ้ลตัวใหญ่ จังหวะฮุคดึงคนดู</p>
+            <div class="flex justify-between items-center mt-4">
+                <span class="text-green-400 font-bold text-lg">💰 30 บาท / 1k วิว</span>
+                <button onclick="claimJob('ตัดไฮไลท์ โค้ช A', this)" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition">
+                    รับงานนี้
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700 job-card relative overflow-hidden">
+            <div class="absolute top-0 right-0 bg-green-500 text-xs font-bold px-3 py-1 rounded-bl-lg">ว่าง (Available)</div>
+            <h2 class="text-2xl font-semibold mb-2 mt-2">ตัดไลฟ์สด แบรนด์สกินแคร์</h2>
+            <p class="text-gray-400 text-sm mb-4">บรีฟ: คัดช็อตฮาๆ ของแม่ค้าตอนไลฟ์ ใส่เอฟเฟกต์ตลกๆ</p>
+            <div class="flex justify-between items-center mt-4">
+                <span class="text-green-400 font-bold text-lg">💰 50 บาท / 1k วิว</span>
+                <button onclick="claimJob('ตัดไลฟ์สด แบรนด์สกินแคร์', this)" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition">
+                    รับงานนี้
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function claimJob(jobName, btnElement) {
+            // 1. ถามชื่อคนกดรับงาน
+            let userName = prompt(`ยืนยันรับงาน: ${jobName}\nกรุณากรอกชื่อเล่น หรือ Discord ID ของคุณ:`);
+            
+            if (userName != null && userName.trim() !== "") {
+                // เปลี่ยนปุ่มเป็นสีเทาและกดไม่ได้
+                btnElement.innerText = "กำลังดำเนินการ...";
+                btnElement.disabled = true;
+                btnElement.classList.replace('bg-blue-600', 'bg-gray-500');
+
+                // 2. ส่งข้อมูลไปที่ Google Apps Script (Webhook)
+                // *** เดี๋ยวเราจะเอา URL ของ Google มาใส่ตรงนี้ในสเต็ปที่ 3 ***
+                let webhookUrl = "ใส่_URL_GOOGLE_SCRIPT_ตรงนี้"; 
+                let requestUrl = webhookUrl + "?job=" + encodeURIComponent(jobName) + "&user=" + encodeURIComponent(userName);
+
+                fetch(requestUrl, { mode: 'no-cors' })
+                    .then(() => {
+                        alert(`✅ รับงานสำเร็จ!\nคุณ ${userName} ได้รับงาน ${jobName} แล้ว\nระบบได้แจ้งเตือนไปยังแอดมินเรียบร้อย`);
+                        btnElement.innerText = "รับงานแล้ว";
+                    })
+                    .catch(error => {
+                        alert("เกิดข้อผิดพลาด กรุณาลองใหม่");
+                        btnElement.innerText = "รับงานนี้";
+                        btnElement.disabled = false;
+                        btnElement.classList.replace('bg-gray-500', 'bg-blue-600');
+                    });
+            }
+        }
+    </script>
+</body>
+</html>
 
