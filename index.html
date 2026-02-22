@@ -29,6 +29,9 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         .split-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .split-btn:hover { transform: scale(1.02); box-shadow: 0 10px 25px -5px rgba(132, 204, 22, 0.4); border-color: #84cc16; }
+        /* อนิเมชันหลอดพลัง */
+        @keyframes loadBar { from { width: 0; } }
+        .progress-fill { animation: loadBar 1s ease-out forwards; }
     </style>
 </head>
 <body class="flex h-screen w-full">
@@ -61,10 +64,6 @@
                 ⚖️ กติกาการรับเงิน (Rules)
             </button>
         </nav>
-        
-        <div class="p-4 border-t border-slate-700 text-xs text-gray-500 text-center">
-            Database: Connected 🟢
-        </div>
     </aside>
 
     <main class="flex-1 overflow-y-auto bg-omniDark p-8 relative">
@@ -74,21 +73,17 @@
                 <h2 class="text-5xl md:text-6xl font-bold mb-6">เชื่อมต่อแบรนด์ กับ <span class="text-omniAccent">กองทัพนักตัดคลิป</span></h2>
                 <p class="text-xl text-gray-400 max-w-2xl mx-auto">OmniAgency เปลี่ยนคอนเทนต์ยาวให้เป็นไวรัลวิดีโอสั้น เราคือตัวกลางระหว่างแบรนด์ที่ต้องการยอดวิว และครีเอเตอร์ที่ต้องการรายได้</p>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div onclick="switchPage('jobs')" class="split-btn cursor-pointer bg-slate-800 rounded-2xl p-10 border border-slate-700 text-center relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition duration-300"></div>
                     <div class="text-6xl mb-6">✂️</div>
                     <h3 class="text-3xl font-bold mb-4 text-white">อยากหาเงิน (Earn)</h3>
-                    <p class="text-gray-400 mb-8">ฉันเป็นนักตัดต่อ/อินฟลูเอนเซอร์ อยากรับงานตัดคลิปสั้น แปะตะกร้า และรับรายได้ตามยอดวิว</p>
+                    <p class="text-gray-400 mb-8">ฉันเป็นนักตัดต่อ/อินฟลูเอนเซอร์ อยากรับงานตัดคลิปสั้น</p>
                     <span class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-full">ดูงานที่เปิดรับ ➔</span>
                 </div>
-
                 <div onclick="switchPage('hire')" class="split-btn cursor-pointer bg-slate-800 rounded-2xl p-10 border border-slate-700 text-center relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-omniAccent/10 opacity-0 group-hover:opacity-100 transition duration-300"></div>
                     <div class="text-6xl mb-6">🚀</div>
                     <h3 class="text-3xl font-bold mb-4 text-white">อยากจ้างงาน (Hire)</h3>
-                    <p class="text-gray-400 mb-8">ฉันเป็นแบรนด์/โค้ช/ครีเอเตอร์ ต้องการให้กองทัพนักตัดคลิปนำวิดีโอของฉันไปกระจายให้ไวรัล</p>
+                    <p class="text-gray-400 mb-8">ฉันเป็นแบรนด์/โค้ช/ครีเอเตอร์ ต้องการกระจ่ายคลิปไวรัล</p>
                     <span class="inline-block bg-omniAccent text-slate-900 font-bold py-3 px-8 rounded-full">ดูแพ็กเกจบริการ ➔</span>
                 </div>
             </div>
@@ -98,27 +93,22 @@
             <h2 class="text-4xl font-bold mb-8 border-b border-slate-700 pb-4">🏢 เกี่ยวกับ OmniAgency</h2>
             <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 mb-8">
                 <h3 class="text-2xl font-bold text-omniAccent mb-4">เราไม่ใช่แค่รับตัดต่อ แต่เราคือ "เครื่องจักรผลิตความไวรัล"</h3>
-                <p class="text-gray-300 leading-relaxed mb-6">OmniAgency คือ Performance-based Micro-Content Agency เรามองเห็นปัญหาว่าแบรนด์มีวิดีโอขนาดยาว แต่ไม่มีเวลาสับย่อยเป็นคลิปสั้น</p>
-                <p class="text-gray-300 leading-relaxed">เราจึงสร้าง <strong class="text-omniAccent">OmniHub</strong> ขึ้นมาเพื่อรวบรวม "นักตัดต่ออิสระ" นับร้อยชีวิต ให้มารับไฟล์ดิบไปตัดต่อ และโพสต์ลงช่องทางของตัวเอง เพื่อกระจายคลิปให้ไวรัล</p>
+                <p class="text-gray-300 leading-relaxed">OmniAgency คือ Performance-based Micro-Content Agency รวบรวม "นักตัดต่ออิสระ" นับร้อยชีวิต ให้มารับไฟล์ดิบไปตัดต่อ และโพสต์ลงช่องทางของตัวเอง เพื่อกระจายคลิปให้ไวรัล</p>
             </div>
         </div>
 
         <div id="page-hire" class="page-content max-w-4xl mx-auto">
             <h2 class="text-4xl font-bold mb-4">🚀 บริการสำหรับผู้ว่าจ้าง (Hire Us)</h2>
             <p class="text-xl text-gray-400 mb-10">หมดยุคจ่ายค่าโฆษณาแพงๆ แล้วลุ้นให้คนดู จ่ายเราเมื่อเห็น "ยอดวิว" หรือ "ยอดขาย" เท่านั้น</p>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
                 <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 transition">
                     <h4 class="text-xl font-bold mb-2">👁️ Pay-per-View Model</h4>
-                    <p class="text-gray-400 text-sm mb-6">เหมาะสำหรับสร้าง Personal Branding / Podcast</p>
                     <div class="text-3xl font-bold text-blue-400 mb-6">฿100 <span class="text-lg text-gray-500 font-normal">/ 1,000 วิว</span></div>
                     <button class="w-full bg-slate-700 text-white font-bold py-3 rounded-xl hover:bg-slate-600">ติดต่อแอดมิน (LINE OA)</button>
                 </div>
-                
-                <div class="bg-slate-800 p-8 rounded-2xl border border-omniAccent relative shadow-[0_0_15px_rgba(132,204,22,0.15)]">
+                <div class="bg-slate-800 p-8 rounded-2xl border border-omniAccent relative">
                     <div class="absolute top-0 right-0 bg-omniAccent text-slate-900 text-xs font-bold px-3 py-1 rounded-bl-lg">ขายดีสุด</div>
                     <h4 class="text-xl font-bold mb-2">🛍️ Affiliate (UGC) Model</h4>
-                    <p class="text-gray-400 text-sm mb-6">เหมาะสำหรับร้านค้า TikTok Shop / Shopee</p>
                     <div class="text-3xl font-bold text-omniAccent mb-6">15% <span class="text-lg text-gray-500 font-normal">/ ค่าคอมยอดขาย</span></div>
                     <button class="w-full bg-omniAccent text-slate-900 font-bold py-3 rounded-xl hover:bg-lime-500 transition">ติดต่อแอดมิน (LINE OA)</button>
                 </div>
@@ -127,7 +117,7 @@
 
         <div id="page-jobs" class="page-content max-w-5xl mx-auto">
             <h2 class="text-3xl font-bold mb-2">📋 บอร์ดรับงาน (Available Jobs)</h2>
-            <p class="text-gray-400 mb-8">งานทั้งหมดอัปเดตแบบ Real-time จากระบบฐานข้อมูลของเรา</p>
+            <p class="text-gray-400 mb-8">รีบรับงานก่อนที่โควต้างบประมาณจะเต็ม!</p>
 
             <div id="job-list-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 </div>
@@ -148,10 +138,9 @@
     </main>
 
     <script>
-        // ใส่ลิงก์ของคุณมาร์คให้เรียบร้อยแล้วครับ!
+        // ใช้ลิงก์เดิมของคุณมาร์คได้เลย
         const API_URL = "https://script.google.com/macros/s/AKfycbwAHUr1xUMyQXmpqwdXuQzhtA8NS3D6qYoCnS5SrDN8eydFMqqdIArYQJzZYWcn8-zHNw/exec";
 
-        // ฟังก์ชันโหลดงานจาก Google Sheets
         async function loadJobs() {
             const container = document.getElementById('job-list-container');
             container.innerHTML = '<div class="text-white bg-slate-800 p-6 rounded-xl border border-slate-700 col-span-2 text-center animate-pulse">กำลังดึงข้อมูลงานล่าสุด... ⏳</div>';
@@ -168,28 +157,58 @@
                 }
 
                 jobs.forEach(job => {
+                    // คำนวณ % งบประมาณ
+                    let budget = parseFloat(job.budget) || 0;
+                    let used = parseFloat(job.used) || 0;
+                    let percent = budget > 0 ? (used / budget) * 100 : 0;
+                    if (percent > 100) percent = 100;
+
+                    let isFull = (used >= budget && budget > 0);
+
+                    // ตั้งค่าหน้าตาของปุ่มและป้ายกำกับตามสถานะโควต้า
+                    let badgeStatus = isFull 
+                        ? `<div class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">⚠️ โควต้าเต็มแล้ว</div>`
+                        : `<div class="absolute top-4 right-4 bg-omniAccent text-slate-900 text-xs font-bold px-3 py-1 rounded-full shadow-lg">🟢 ว่าง</div>`;
+                    
+                    let btnClass = isFull
+                        ? `bg-slate-700 text-gray-400 cursor-not-allowed`
+                        : `bg-blue-600 hover:bg-blue-500 text-white transform active:scale-95`;
+                    
+                    let btnText = isFull ? `โควต้าเต็ม (Full)` : `กดรับงานนี้ 🚀`;
+                    let disableAttr = isFull ? `disabled` : ``;
+
                     let card = `
-                    <div class="job-card bg-slate-800 p-6 rounded-2xl border border-slate-700 relative transition-all hover:-translate-y-1 hover:border-omniAccent hover:shadow-lg">
-                        <div class="absolute top-4 right-4 bg-omniAccent text-slate-900 text-xs font-bold px-3 py-1 rounded-full">ว่าง</div>
-                        <h3 class="text-xl font-bold text-white mb-2">${job.title}</h3>
+                    <div class="job-card bg-slate-800 p-6 rounded-2xl border ${isFull ? 'border-red-900/50 opacity-80' : 'border-slate-700 hover:-translate-y-1 hover:border-omniAccent hover:shadow-lg'} relative transition-all">
+                        ${badgeStatus}
+                        <h3 class="text-xl font-bold text-white mb-2 w-[80%]">${job.title}</h3>
                         <p class="text-gray-400 text-sm mb-4 h-12 overflow-hidden">${job.brief}</p>
-                        <div class="flex justify-between items-center mb-4 p-3 bg-slate-900/50 rounded-lg border border-slate-700">
+                        
+                        <div class="flex justify-between items-center mb-3 p-3 bg-slate-900/50 rounded-lg border border-slate-700">
                             <span class="text-sm text-gray-400">เรทจ่าย:</span>
                             <span class="text-omniAccent font-bold text-lg">💰 ${job.price}฿ / 1k วิว</span>
                         </div>
-                        <button onclick="claimJob('${job.title}', this)" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-4 rounded-xl transition transform active:scale-95">
-                            กดรับงานนี้
+
+                        <div class="mb-5 bg-slate-900/80 p-3 rounded-lg border border-slate-700">
+                            <div class="flex justify-between text-xs mb-2">
+                                <span class="text-gray-400">งบที่จ่ายไป: <span class="text-white font-bold">${used}฿</span></span>
+                                <span class="text-gray-400">งบสูงสุด: <span class="text-omniAccent font-bold">${budget}฿</span></span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2 overflow-hidden">
+                                <div class="bg-gradient-to-r ${isFull ? 'from-red-500 to-red-600' : 'from-lime-400 to-omniAccent'} h-2 rounded-full progress-fill" style="width: ${percent}%"></div>
+                            </div>
+                        </div>
+
+                        <button onclick="claimJob('${job.title}', this)" class="w-full font-bold py-3 px-4 rounded-xl transition ${btnClass}" ${disableAttr}>
+                            ${btnText}
                         </button>
                     </div>`;
                     container.innerHTML += card;
                 });
             } catch (error) {
-                console.error(error);
                 container.innerHTML = '<div class="text-red-400 bg-slate-800 p-6 rounded-xl border border-red-900 col-span-2 text-center">โหลดข้อมูลไม่สำเร็จ กรุณารีเฟรชหน้าเว็บอีกครั้ง</div>';
             }
         }
 
-        // ฟังก์ชันสลับหน้า
         function switchPage(pageId) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -198,13 +217,9 @@
             let navItem = document.getElementById('nav-' + pageId);
             if(navItem) navItem.classList.add('active');
 
-            // ถ้ากดเข้าหน้า jobs ให้โหลดข้อมูลใหม่
-            if(pageId === 'jobs') {
-                loadJobs();
-            }
+            if(pageId === 'jobs') loadJobs();
         }
 
-        // ฟังก์ชันรับงาน
         function claimJob(jobTitle, btnElement) {
             let userName = prompt(`👇 ยืนยันการรับงาน: "${jobTitle}"\n\nกรุณากรอก ชื่อเล่น หรือ Discord ID ของคุณ:`);
             if (userName && userName.trim() !== "") {
