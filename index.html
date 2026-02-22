@@ -9,13 +9,7 @@
         tailwind.config = {
             darkMode: 'class',
             theme: {
-                extend: {
-                    colors: {
-                        omniDark: '#0b1120', 
-                        omniPanel: '#1e293b', 
-                        omniAccent: '#84cc16', 
-                    }
-                }
+                extend: { colors: { omniDark: '#0b1120', omniPanel: '#1e293b', omniAccent: '#84cc16' } }
             }
         }
     </script>
@@ -27,11 +21,8 @@
         .page-content { display: none; }
         .page-content.active { display: block; animation: fadeIn 0.4s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        .split-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .split-btn:hover { transform: scale(1.02); box-shadow: 0 10px 25px -5px rgba(132, 204, 22, 0.4); border-color: #84cc16; }
-        /* อนิเมชันหลอดพลัง */
-        @keyframes loadBar { from { width: 0; } }
         .progress-fill { animation: loadBar 1s ease-out forwards; }
+        @keyframes loadBar { from { width: 0; } }
     </style>
 </head>
 <body class="flex h-screen w-full">
@@ -39,108 +30,138 @@
     <aside class="w-64 bg-omniPanel border-r border-slate-800 flex flex-col hidden md:flex">
         <div class="p-6 border-b border-slate-700">
             <h1 class="text-3xl font-bold tracking-tight"><span class="text-omniAccent">Omni</span>Hub</h1>
-            <p class="text-xs text-gray-400 mt-1">Performance-Based Agency</p>
+            <p class="text-xs text-gray-400 mt-1">Automated Agency V.3</p>
         </div>
-        
         <nav class="flex-1 py-4 overflow-y-auto">
             <div class="px-6 mb-2 text-xs font-bold text-gray-500 uppercase tracking-wider">Start Here</div>
-            <button onclick="switchPage('landing')" id="nav-landing" class="nav-btn active w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white hover:bg-slate-800 flex items-center">
-                🏠 หน้าหลัก (Home)
-            </button>
-            <button onclick="switchPage('about')" id="nav-about" class="nav-btn w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white hover:bg-slate-800 flex items-center">
-                🏢 เกี่ยวกับเรา (About Us)
-            </button>
+            <button onclick="switchPage('landing')" id="nav-landing" class="nav-btn active w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white flex items-center">🏠 หน้าหลัก (Home)</button>
+            <button onclick="switchPage('about')" id="nav-about" class="nav-btn w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white flex items-center">🏢 เกี่ยวกับเรา (About Us)</button>
 
-            <div class="px-6 mt-6 mb-2 text-xs font-bold text-omniAccent uppercase tracking-wider">For Brands (ผู้ว่าจ้าง)</div>
-            <button onclick="switchPage('hire')" id="nav-hire" class="nav-btn w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white hover:bg-slate-800 flex items-center">
-                📈 บริการดันยอดวิว (Hire Us)
-            </button>
+            <div class="px-6 mt-6 mb-2 text-xs font-bold text-omniAccent uppercase tracking-wider">For Brands</div>
+            <button onclick="switchPage('hire')" id="nav-hire" class="nav-btn w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white flex items-center">🚀 สร้างแคมเปญจ้างงาน</button>
 
-            <div class="px-6 mt-6 mb-2 text-xs font-bold text-blue-400 uppercase tracking-wider">For Clippers (คนทำงาน)</div>
-            <button onclick="switchPage('jobs')" id="nav-jobs" class="nav-btn w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white hover:bg-slate-800 flex items-center">
-                📋 บอร์ดรับงาน (Job Board)
-            </button>
-            <button onclick="switchPage('rules')" id="nav-rules" class="nav-btn w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white hover:bg-slate-800 flex items-center">
-                ⚖️ กติกาการรับเงิน (Rules)
-            </button>
+            <div class="px-6 mt-6 mb-2 text-xs font-bold text-blue-400 uppercase tracking-wider">For Clippers</div>
+            <button onclick="switchPage('jobs')" id="nav-jobs" class="nav-btn w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white flex items-center">📋 บอร์ดรับงาน</button>
+            <button onclick="switchPage('rules')" id="nav-rules" class="nav-btn w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white flex items-center">⚖️ กติกาการรับเงิน</button>
         </nav>
     </aside>
 
     <main class="flex-1 overflow-y-auto bg-omniDark p-8 relative">
 
-        <div id="page-landing" class="page-content active max-w-5xl mx-auto h-full flex flex-col justify-center min-h-[80vh]">
-            <div class="text-center mb-12">
-                <h2 class="text-5xl md:text-6xl font-bold mb-6">เชื่อมต่อแบรนด์ กับ <span class="text-omniAccent">กองทัพนักตัดคลิป</span></h2>
-                <p class="text-xl text-gray-400 max-w-2xl mx-auto">OmniAgency เปลี่ยนคอนเทนต์ยาวให้เป็นไวรัลวิดีโอสั้น เราคือตัวกลางระหว่างแบรนด์ที่ต้องการยอดวิว และครีเอเตอร์ที่ต้องการรายได้</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div onclick="switchPage('jobs')" class="split-btn cursor-pointer bg-slate-800 rounded-2xl p-10 border border-slate-700 text-center relative overflow-hidden group">
-                    <div class="text-6xl mb-6">✂️</div>
-                    <h3 class="text-3xl font-bold mb-4 text-white">อยากหาเงิน (Earn)</h3>
-                    <p class="text-gray-400 mb-8">ฉันเป็นนักตัดต่อ/อินฟลูเอนเซอร์ อยากรับงานตัดคลิปสั้น</p>
-                    <span class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-full">ดูงานที่เปิดรับ ➔</span>
-                </div>
-                <div onclick="switchPage('hire')" class="split-btn cursor-pointer bg-slate-800 rounded-2xl p-10 border border-slate-700 text-center relative overflow-hidden group">
-                    <div class="text-6xl mb-6">🚀</div>
-                    <h3 class="text-3xl font-bold mb-4 text-white">อยากจ้างงาน (Hire)</h3>
-                    <p class="text-gray-400 mb-8">ฉันเป็นแบรนด์/โค้ช/ครีเอเตอร์ ต้องการกระจ่ายคลิปไวรัล</p>
-                    <span class="inline-block bg-omniAccent text-slate-900 font-bold py-3 px-8 rounded-full">ดูแพ็กเกจบริการ ➔</span>
-                </div>
+        <div id="page-landing" class="page-content active max-w-5xl mx-auto h-full flex flex-col justify-center min-h-[80vh] text-center">
+            <h2 class="text-5xl md:text-6xl font-bold mb-6">เชื่อมต่อแบรนด์ กับ <span class="text-omniAccent">กองทัพนักตัดคลิป</span></h2>
+            <p class="text-xl text-gray-400 mb-12">ระบบอัตโนมัติ จ้างงานปุ๊บ กระจายงานลงบอร์ดให้ลูกทีมตัดทันที</p>
+            <div class="flex justify-center gap-6">
+                <button onclick="switchPage('jobs')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-xl text-lg">✂️ หาเงิน (รับงาน)</button>
+                <button onclick="switchPage('hire')" class="bg-omniAccent hover:bg-lime-500 text-slate-900 font-bold py-4 px-8 rounded-xl text-lg">🚀 จ้างงาน (สร้างแคมเปญ)</button>
             </div>
         </div>
 
-        <div id="page-about" class="page-content max-w-4xl mx-auto">
-            <h2 class="text-4xl font-bold mb-8 border-b border-slate-700 pb-4">🏢 เกี่ยวกับ OmniAgency</h2>
-            <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 mb-8">
-                <h3 class="text-2xl font-bold text-omniAccent mb-4">เราไม่ใช่แค่รับตัดต่อ แต่เราคือ "เครื่องจักรผลิตความไวรัล"</h3>
-                <p class="text-gray-300 leading-relaxed">OmniAgency คือ Performance-based Micro-Content Agency รวบรวม "นักตัดต่ออิสระ" นับร้อยชีวิต ให้มารับไฟล์ดิบไปตัดต่อ และโพสต์ลงช่องทางของตัวเอง เพื่อกระจายคลิปให้ไวรัล</p>
-            </div>
-        </div>
+        <div id="page-about" class="page-content max-w-4xl mx-auto"><h2 class="text-4xl font-bold">🏢 เกี่ยวกับ OmniAgency</h2></div>
+        <div id="page-rules" class="page-content max-w-4xl mx-auto"><h2 class="text-3xl font-bold">⚖️ กติกาการรับเงิน</h2></div>
 
-        <div id="page-hire" class="page-content max-w-4xl mx-auto">
-            <h2 class="text-4xl font-bold mb-4">🚀 บริการสำหรับผู้ว่าจ้าง (Hire Us)</h2>
-            <p class="text-xl text-gray-400 mb-10">หมดยุคจ่ายค่าโฆษณาแพงๆ แล้วลุ้นให้คนดู จ่ายเราเมื่อเห็น "ยอดวิว" หรือ "ยอดขาย" เท่านั้น</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 transition">
-                    <h4 class="text-xl font-bold mb-2">👁️ Pay-per-View Model</h4>
-                    <div class="text-3xl font-bold text-blue-400 mb-6">฿100 <span class="text-lg text-gray-500 font-normal">/ 1,000 วิว</span></div>
-                    <button class="w-full bg-slate-700 text-white font-bold py-3 rounded-xl hover:bg-slate-600">ติดต่อแอดมิน (LINE OA)</button>
+        <div id="page-hire" class="page-content max-w-3xl mx-auto">
+            <h2 class="text-4xl font-bold mb-2">🚀 สร้างแคมเปญจ้างงาน (Hire Us)</h2>
+            <p class="text-gray-400 mb-8">กระจายคลิปของคุณให้ไวรัล กรอกรายละเอียดด้านล่าง ระบบจะส่งงานให้กองทัพนักตัดคลิปทันที</p>
+
+            <form id="hireForm" onsubmit="submitCampaign(event)" class="bg-slate-800 p-8 rounded-2xl border border-slate-700 shadow-xl">
+                
+                <div class="mb-5">
+                    <label class="block text-sm font-bold text-gray-300 mb-2">ชื่องาน / แบรนด์ของคุณ</label>
+                    <input type="text" name="title" required placeholder="เช่น สินค้าครีมกันแดด หรือ ไฮไลท์สตรีมเมอร์" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg p-3 focus:border-omniAccent outline-none">
                 </div>
-                <div class="bg-slate-800 p-8 rounded-2xl border border-omniAccent relative">
-                    <div class="absolute top-0 right-0 bg-omniAccent text-slate-900 text-xs font-bold px-3 py-1 rounded-bl-lg">ขายดีสุด</div>
-                    <h4 class="text-xl font-bold mb-2">🛍️ Affiliate (UGC) Model</h4>
-                    <div class="text-3xl font-bold text-omniAccent mb-6">15% <span class="text-lg text-gray-500 font-normal">/ ค่าคอมยอดขาย</span></div>
-                    <button class="w-full bg-omniAccent text-slate-900 font-bold py-3 rounded-xl hover:bg-lime-500 transition">ติดต่อแอดมิน (LINE OA)</button>
+
+                <div class="mb-5">
+                    <label class="block text-sm font-bold text-gray-300 mb-2">หมวดหมู่งาน</label>
+                    <select name="category" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg p-3 outline-none">
+                        <option value="เกม">🎮 แคสเกม / สตรีมเมอร์</option>
+                        <option value="เพลง">🎵 โปรโมทเพลงใหม่</option>
+                        <option value="หนัง/ซีรีส์">🎬 สปอยหนัง / ซีรีส์</option>
+                        <option value="สินค้า">🛍️ รีวิวสินค้า / Affiliate</option>
+                        <option value="ความรู้">🎙️ Podcast / โค้ชสอนธุรกิจ</option>
+                    </select>
                 </div>
-            </div>
+
+                <div class="mb-5">
+                    <label class="block text-sm font-bold text-gray-300 mb-2">บรีฟงาน (ต้องการให้ตัดแบบไหน? ส่งลิงก์ไฟล์ดิบที่นี่)</label>
+                    <textarea name="brief" required rows="4" placeholder="เช่น ให้เน้นจังหวะฮาๆ ใส่ซับไตเติ้ลสีเหลือง ลิงก์ไฟล์ดิบ: Google Drive..." class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg p-3 outline-none"></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-300 mb-2">เรทจ่าย (ต่อ 1,000 วิว)</label>
+                        <select name="rate" class="w-full bg-slate-900 text-white border border-slate-600 rounded-lg p-3 outline-none">
+                            <option value="30">30 บาท</option>
+                            <option value="50" selected>50 บาท (มาตรฐาน)</option>
+                            <option value="80">80 บาท</option>
+                            <option value="100">100 บาท (ดึงดูดคนตัดได้ไว)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-omniAccent mb-2">งบประมาณรวม (บาท)</label>
+                        <input type="number" name="budget" required min="500" placeholder="เช่น 5000" class="w-full bg-slate-900 text-white border border-omniAccent rounded-lg p-3 outline-none">
+                    </div>
+                </div>
+
+                <div class="bg-blue-900/30 border border-blue-500 p-4 rounded-lg mb-6">
+                    <p class="text-xs text-blue-300">💡 <strong>ระบบเอเจนซี่:</strong> เราจะหักค่าบริการแพลตฟอร์ม 30% จากงบประมาณรวมของคุณ และนำงบ 70% ไปสร้างเป็นหลอดโควต้าให้เครือข่ายนักตัดต่อของเรากระจายคลิปให้คุณ</p>
+                </div>
+
+                <button id="submitHireBtn" type="submit" class="w-full bg-omniAccent hover:bg-lime-500 text-slate-900 font-bold py-4 rounded-xl text-lg transition transform active:scale-95">
+                    🚀 ชำระเงินและสร้างแคมเปญ
+                </button>
+            </form>
         </div>
 
         <div id="page-jobs" class="page-content max-w-5xl mx-auto">
             <h2 class="text-3xl font-bold mb-2">📋 บอร์ดรับงาน (Available Jobs)</h2>
             <p class="text-gray-400 mb-8">รีบรับงานก่อนที่โควต้างบประมาณจะเต็ม!</p>
-
-            <div id="job-list-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                </div>
-        </div>
-
-        <div id="page-rules" class="page-content max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold mb-6">⚖️ กติกาและโครงสร้างรายได้</h2>
-            <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 mb-6">
-                <h3 class="text-xl font-bold text-omniAccent mb-4">💰 โครงสร้างการจ่ายเงิน</h3>
-                <ul class="list-disc list-inside text-gray-300 space-y-3">
-                    <li>รับเงินตามเรทที่ระบุในการ์ดงาน (เฉพาะยอดวิวออร์แกนิคเท่านั้น)</li>
-                    <li>เมื่อยอดวิวถึงเป้าหมาย ให้แคปหน้าจอและส่งหลักฐานผ่าน LINE OA เพื่อเบิกเงิน</li>
-                    <li class="text-red-400">ห้ามปั๊มยอดวิวด้วยโปรแกรม หากตรวจพบแบน ID ทันที</li>
-                </ul>
-            </div>
+            <div id="job-list-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
         </div>
 
     </main>
 
     <script>
-        // ใช้ลิงก์เดิมของคุณมาร์คได้เลย
+        // 🔴🔴🔴 ใส่ลิงก์ของคุณมาร์คตรงนี้ (ใช้ลิงก์เดิมที่ลงท้ายด้วย /exec) 🔴🔴🔴
         const API_URL = "https://script.google.com/macros/s/AKfycbwAHUr1xUMyQXmpqwdXuQzhtA8NS3D6qYoCnS5SrDN8eydFMqqdIArYQJzZYWcn8-zHNw/exec";
 
+        // ฟังก์ชันส่งข้อมูลจ้างงานไปที่ Google Sheets
+        async function submitCampaign(event) {
+            event.preventDefault(); // ป้องกันหน้าเว็บรีเฟรช
+            
+            const btn = document.getElementById('submitHireBtn');
+            const form = document.getElementById('hireForm');
+            
+            btn.innerHTML = "กำลังประมวลผลระบบ... ⏳";
+            btn.disabled = true;
+            btn.classList.add('opacity-50');
+
+            // ดึงข้อมูลจากฟอร์ม
+            let formData = new URLSearchParams(new FormData(form));
+
+            try {
+                // ส่งข้อมูลไปหลังบ้าน
+                await fetch(API_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                alert('✅ สร้างแคมเปญสำเร็จ!\n\nระบบได้หัก 30% และนำงานของคุณขึ้น "บอร์ดรับงาน" ให้ลูกทีมเรียบร้อยแล้วครับ');
+                form.reset(); // ล้างข้อมูลในฟอร์ม
+                
+                // สลับหน้าไปดูผลงานที่บอร์ดงาน
+                switchPage('jobs');
+
+            } catch (error) {
+                alert('⚠️ เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+            }
+
+            btn.innerHTML = "🚀 ชำระเงินและสร้างแคมเปญ";
+            btn.disabled = false;
+            btn.classList.remove('opacity-50');
+        }
+
+        // ฟังก์ชันโหลดงานมาโชว์ที่บอร์ด
         async function loadJobs() {
             const container = document.getElementById('job-list-container');
             container.innerHTML = '<div class="text-white bg-slate-800 p-6 rounded-xl border border-slate-700 col-span-2 text-center animate-pulse">กำลังดึงข้อมูลงานล่าสุด... ⏳</div>';
@@ -150,35 +171,28 @@
                 let jobs = await response.json();
                 
                 container.innerHTML = ''; 
-                
                 if(!jobs || jobs.length === 0) {
                     container.innerHTML = '<div class="text-gray-400 bg-slate-800 p-6 rounded-xl border border-slate-700 col-span-2 text-center">ขณะนี้ยังไม่มีงานเปิดรับครับ รอแอดมินอัปเดตนะ!</div>';
                     return;
                 }
 
-                jobs.forEach(job => {
-                    // คำนวณ % งบประมาณ
+                // เรียงให้งานใหม่ล่าสุดขึ้นก่อน
+                jobs.reverse().forEach(job => {
                     let budget = parseFloat(job.budget) || 0;
                     let used = parseFloat(job.used) || 0;
                     let percent = budget > 0 ? (used / budget) * 100 : 0;
                     if (percent > 100) percent = 100;
 
                     let isFull = (used >= budget && budget > 0);
-
-                    // ตั้งค่าหน้าตาของปุ่มและป้ายกำกับตามสถานะโควต้า
                     let badgeStatus = isFull 
-                        ? `<div class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">⚠️ โควต้าเต็มแล้ว</div>`
-                        : `<div class="absolute top-4 right-4 bg-omniAccent text-slate-900 text-xs font-bold px-3 py-1 rounded-full shadow-lg">🟢 ว่าง</div>`;
+                        ? `<div class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">⚠️ โควต้าเต็ม</div>`
+                        : `<div class="absolute top-4 right-4 bg-omniAccent text-slate-900 text-xs font-bold px-3 py-1 rounded-full">🟢 ว่าง</div>`;
                     
-                    let btnClass = isFull
-                        ? `bg-slate-700 text-gray-400 cursor-not-allowed`
-                        : `bg-blue-600 hover:bg-blue-500 text-white transform active:scale-95`;
-                    
-                    let btnText = isFull ? `โควต้าเต็ม (Full)` : `กดรับงานนี้ 🚀`;
+                    let btnClass = isFull ? `bg-slate-700 text-gray-400 cursor-not-allowed` : `bg-blue-600 hover:bg-blue-500 text-white`;
                     let disableAttr = isFull ? `disabled` : ``;
 
                     let card = `
-                    <div class="job-card bg-slate-800 p-6 rounded-2xl border ${isFull ? 'border-red-900/50 opacity-80' : 'border-slate-700 hover:-translate-y-1 hover:border-omniAccent hover:shadow-lg'} relative transition-all">
+                    <div class="job-card bg-slate-800 p-6 rounded-2xl border ${isFull ? 'border-red-900/50 opacity-80' : 'border-slate-700 hover:border-omniAccent'} relative transition-all">
                         ${badgeStatus}
                         <h3 class="text-xl font-bold text-white mb-2 w-[80%]">${job.title}</h3>
                         <p class="text-gray-400 text-sm mb-4 h-12 overflow-hidden">${job.brief}</p>
@@ -193,41 +207,35 @@
                                 <span class="text-gray-400">งบที่จ่ายไป: <span class="text-white font-bold">${used}฿</span></span>
                                 <span class="text-gray-400">งบสูงสุด: <span class="text-omniAccent font-bold">${budget}฿</span></span>
                             </div>
-                            <div class="w-full bg-slate-700 rounded-full h-2 overflow-hidden">
+                            <div class="w-full bg-slate-700 rounded-full h-2">
                                 <div class="bg-gradient-to-r ${isFull ? 'from-red-500 to-red-600' : 'from-lime-400 to-omniAccent'} h-2 rounded-full progress-fill" style="width: ${percent}%"></div>
                             </div>
                         </div>
 
                         <button onclick="claimJob('${job.title}', this)" class="w-full font-bold py-3 px-4 rounded-xl transition ${btnClass}" ${disableAttr}>
-                            ${btnText}
+                            ${isFull ? 'โควต้าเต็ม (Full)' : 'กดรับงานนี้ 🚀'}
                         </button>
                     </div>`;
                     container.innerHTML += card;
                 });
-            } catch (error) {
-                container.innerHTML = '<div class="text-red-400 bg-slate-800 p-6 rounded-xl border border-red-900 col-span-2 text-center">โหลดข้อมูลไม่สำเร็จ กรุณารีเฟรชหน้าเว็บอีกครั้ง</div>';
-            }
+            } catch (error) {}
         }
 
         function switchPage(pageId) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            
             document.getElementById('page-' + pageId).classList.add('active');
             let navItem = document.getElementById('nav-' + pageId);
             if(navItem) navItem.classList.add('active');
-
             if(pageId === 'jobs') loadJobs();
         }
 
         function claimJob(jobTitle, btnElement) {
-            let userName = prompt(`👇 ยืนยันการรับงาน: "${jobTitle}"\n\nกรุณากรอก ชื่อเล่น หรือ Discord ID ของคุณ:`);
-            if (userName && userName.trim() !== "") {
-                btnElement.innerHTML = "✅ รับงานเรียบร้อยแล้ว";
-                btnElement.classList.replace('bg-blue-600', 'bg-slate-600');
-                btnElement.classList.replace('hover:bg-blue-500', 'text-gray-400');
+            let userName = prompt(`👇 ยืนยันรับงาน: "${jobTitle}"\nกรุณากรอก ชื่อเล่น ของคุณ:`);
+            if (userName) {
+                btnElement.innerHTML = "✅ รับงานแล้ว";
+                btnElement.className = "w-full font-bold py-3 px-4 rounded-xl transition bg-slate-600 text-gray-400 cursor-not-allowed";
                 btnElement.disabled = true;
-                alert(`🎉 ยินดีด้วยคุณ ${userName}!\n\nคุณได้รับโควตางาน "${jobTitle}" แล้ว\nลุยเลยครับ!`);
             }
         }
     </script>
