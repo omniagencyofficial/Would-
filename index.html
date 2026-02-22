@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniHub - The #1 Hub For Clipping</title>
+    <title>OmniHub - The #1 Short-Form Video Agency</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -11,190 +11,176 @@
             theme: {
                 extend: {
                     colors: {
-                        omniDark: '#0b1120', // สีพื้นหลังแบบพรีเมียม
-                        omniPanel: '#1e293b', // สีเมนู
-                        omniAccent: '#84cc16', // สีเขียวแบรนด์
+                        omniDark: '#0b1120', 
+                        omniPanel: '#1e293b', 
+                        omniAccent: '#84cc16', 
                     }
                 }
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Kanit', sans-serif; background-color: #0b1120; color: white; overflow: hidden; }
         .nav-btn { transition: all 0.2s; }
         .nav-btn.active { background-color: rgba(132, 204, 22, 0.1); color: #84cc16; border-right: 4px solid #84cc16; }
-        .job-card:hover { transform: translateY(-5px); border-color: #84cc16; }
-        /* ซ่อนหน้าเว็บที่ไม่ได้เลือก */
         .page-content { display: none; }
-        .page-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .page-content.active { display: block; animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        /* เอฟเฟกต์ปุ่มหน้าแรก */
+        .split-btn { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .split-btn:hover { transform: scale(1.02); box-shadow: 0 10px 25px -5px rgba(132, 204, 22, 0.4); border-color: #84cc16; }
     </style>
 </head>
 <body class="flex h-screen w-full">
 
     <aside class="w-64 bg-omniPanel border-r border-slate-800 flex flex-col hidden md:flex">
         <div class="p-6 border-b border-slate-700">
-            <h1 class="text-3xl font-bold tracking-tight">
-                <span class="text-omniAccent">Omni</span>Hub
-            </h1>
-            <p class="text-xs text-gray-400 mt-1">by OmniAgency Official</p>
+            <h1 class="text-3xl font-bold tracking-tight"><span class="text-omniAccent">Omni</span>Hub</h1>
+            <p class="text-xs text-gray-400 mt-1">Performance-Based Agency</p>
         </div>
         
-        <nav class="flex-1 py-4">
-            <button onclick="switchPage('home')" id="nav-home" class="nav-btn active w-full text-left px-6 py-4 font-semibold text-gray-300 hover:text-white hover:bg-slate-800 focus:outline-none flex items-center">
-                🏠 หน้าแรก (Start Here)
+        <nav class="flex-1 py-4 overflow-y-auto">
+            <div class="px-6 mb-2 text-xs font-bold text-gray-500 uppercase tracking-wider">Start Here</div>
+            <button onclick="switchPage('landing')" id="nav-landing" class="nav-btn active w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white hover:bg-slate-800 flex items-center">
+                🏠 หน้าหลัก (Home)
             </button>
-            <button onclick="switchPage('jobs')" id="nav-jobs" class="nav-btn w-full text-left px-6 py-4 font-semibold text-gray-300 hover:text-white hover:bg-slate-800 focus:outline-none flex items-center">
+            <button onclick="switchPage('about')" id="nav-about" class="nav-btn w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white hover:bg-slate-800 flex items-center">
+                🏢 เกี่ยวกับเรา (About Us)
+            </button>
+
+            <div class="px-6 mt-6 mb-2 text-xs font-bold text-omniAccent uppercase tracking-wider">For Brands (สำหรับผู้ว่าจ้าง)</div>
+            <button onclick="switchPage('hire')" id="nav-hire" class="nav-btn w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white hover:bg-slate-800 flex items-center">
+                📈 บริการดันยอดวิว (Hire Us)
+            </button>
+
+            <div class="px-6 mt-6 mb-2 text-xs font-bold text-blue-400 uppercase tracking-wider">For Clippers (สำหรับคนทำงาน)</div>
+            <button onclick="switchPage('jobs')" id="nav-jobs" class="nav-btn w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white hover:bg-slate-800 flex items-center">
                 📋 บอร์ดรับงาน (Job Board)
             </button>
-            <button onclick="switchPage('rules')" id="nav-rules" class="nav-btn w-full text-left px-6 py-4 font-semibold text-gray-300 hover:text-white hover:bg-slate-800 focus:outline-none flex items-center">
-                ⚖️ กติกา & เรทราคา (Rules)
-            </button>
-            <button onclick="switchPage('submit')" id="nav-submit" class="nav-btn w-full text-left px-6 py-4 font-semibold text-gray-300 hover:text-white hover:bg-slate-800 focus:outline-none flex items-center">
-                ✅ ส่งงานรับเงิน (Submit)
+            <button onclick="switchPage('rules')" id="nav-rules" class="nav-btn w-full text-left px-6 py-3 font-semibold text-gray-300 hover:text-white hover:bg-slate-800 flex items-center">
+                ⚖️ กติกาการรับเงิน (Rules)
             </button>
         </nav>
-        
-        <div class="p-4 border-t border-slate-700 text-xs text-gray-500 text-center">
-            System Online 🟢
-        </div>
     </aside>
 
-    <main class="flex-1 overflow-y-auto bg-omniDark p-8 relative">
+    <main class="flex-1 overflow-y-auto bg-omniDark p-8">
 
-        <div id="page-home" class="page-content active max-w-4xl mx-auto">
-            <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-8 mb-8 border border-slate-700 shadow-xl">
-                <h2 class="text-4xl font-bold mb-4">ยินดีต้อนรับสู่ <span class="text-omniAccent">OmniHub</span> 🚀</h2>
-                <p class="text-xl text-gray-300 mb-6">คอมมูนิตี้สำหรับนักตัดคลิปสั้น (Shorts, Reels, TikTok) ที่เดียวที่คุณสามารถเปลี่ยน "ทักษะ" และ "ยอดวิว" ให้เป็น "เงินสด" ได้โดยไม่ต้องหาลูกค้าเอง</p>
-                <button onclick="switchPage('jobs')" class="bg-omniAccent text-slate-900 font-bold px-8 py-3 rounded-lg hover:bg-lime-500 transition">
-                    👉 ไปดูงานที่เปิดรับเลย
-                </button>
+        <div id="page-landing" class="page-content active max-w-5xl mx-auto h-full flex flex-col justify-center min-h-[80vh]">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl md:text-6xl font-bold mb-6">เชื่อมต่อแบรนด์ กับ <span class="text-omniAccent">กองทัพนักตัดคลิป</span></h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">OmniAgency เปลี่ยนคอนเทนต์ยาวให้เป็นไวรัลวิดีโอสั้น เราคือตัวกลางระหว่างแบรนด์ที่ต้องการยอดวิว และครีเอเตอร์ที่ต้องการรายได้</p>
             </div>
 
-            <h3 class="text-2xl font-bold mb-6 border-b border-slate-700 pb-2">ระบบของเราทำงานยังไง?</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                    <div class="text-4xl mb-4">1️⃣</div>
-                    <h4 class="text-xl font-bold text-omniAccent mb-2">เลือกงาน</h4>
-                    <p class="text-gray-400 text-sm">เข้าไปที่เมนู "บอร์ดรับงาน" เลือกคลิปที่คุณอยากตัด ไม่ต้องรอสัมภาษณ์ กดรับงานได้ทันที</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div onclick="switchPage('jobs')" class="split-btn cursor-pointer bg-slate-800 rounded-2xl p-10 border border-slate-700 text-center relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+                    <div class="text-6xl mb-6">✂️</div>
+                    <h3 class="text-3xl font-bold mb-4 text-white">อยากหาเงิน (Earn)</h3>
+                    <p class="text-gray-400 mb-8">ฉันเป็นนักตัดต่อ/อินฟลูเอนเซอร์ อยากรับงานตัดคลิปสั้น แปะตะกร้า และรับรายได้ตามยอดวิว</p>
+                    <span class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-full">ดูงานที่เปิดรับ ➔</span>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                    <div class="text-4xl mb-4">2️⃣</div>
-                    <h4 class="text-xl font-bold text-omniAccent mb-2">ตัดและโพสต์</h4>
-                    <p class="text-gray-400 text-sm">ใช้ฝีมือของคุณตัดไฮไลท์ ใส่ซับไตเติ้ล แล้วนำไปโพสต์ลงช่องทางที่กำหนด (TikTok/Reels)</p>
+
+                <div onclick="switchPage('hire')" class="split-btn cursor-pointer bg-slate-800 rounded-2xl p-10 border border-slate-700 text-center relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-omniAccent/10 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+                    <div class="text-6xl mb-6">🚀</div>
+                    <h3 class="text-3xl font-bold mb-4 text-white">อยากจ้างงาน (Hire)</h3>
+                    <p class="text-gray-400 mb-8">ฉันเป็นแบรนด์/โค้ช/ครีเอเตอร์ ต้องการให้กองทัพนักตัดคลิปนำวิดีโอของฉันไปกระจายให้ไวรัล</p>
+                    <span class="inline-block bg-omniAccent text-slate-900 font-bold py-3 px-8 rounded-full">ดูแพ็กเกจบริการ ➔</span>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
-                    <div class="text-4xl mb-4">3️⃣</div>
-                    <h4 class="text-xl font-bold text-omniAccent mb-2">รับเงินตามวิว</h4>
-                    <p class="text-gray-400 text-sm">เมื่อยอดวิวถึงเป้า ไปที่เมนู "ส่งงาน" แคปหน้าจอส่งหลักฐาน แอดมินโอนเงินเข้าบัญชีทันที!</p>
+            </div>
+        </div>
+
+        <div id="page-about" class="page-content max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold mb-8 border-b border-slate-700 pb-4">🏢 เกี่ยวกับ OmniAgency</h2>
+            <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 mb-8">
+                <h3 class="text-2xl font-bold text-omniAccent mb-4">เราไม่ใช่แค่รับตัดต่อ แต่เราคือ "เครื่องจักรผลิตความไวรัล"</h3>
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    OmniAgency คือ <strong class="text-white">Performance-based Micro-Content Agency</strong> แห่งแรกๆ ของไทย เรามองเห็นปัญหาว่า 
+                    "แบรนด์และครีเอเตอร์" มีวิดีโอขนาดยาว (Long-form) หรือไลฟ์สดที่ยอดเยี่ยม แต่ไม่มีเวลาหรือบุคลากรมากพอที่จะนำมาสับย่อยเป็นคลิปสั้นลง TikTok, Reels หรือ Shorts 
+                    และมักจะเสียเงินจ้างพนักงานประจำโดยการันตียอดวิวไม่ได้
+                </p>
+                <p class="text-gray-300 leading-relaxed">
+                    เราจึงสร้าง <strong class="text-omniAccent">OmniHub</strong> ขึ้นมาเพื่อรวบรวม "นักตัดต่ออิสระ (Clippers)" และ "นักรีวิว (UGC)" นับร้อยชีวิต 
+                    ให้มาช่วยกันรับไฟล์ดิบของลูกค้า ไปตัดต่อในสไตล์ที่หลากหลาย และ **กระจายโพสต์ลงในช่องทางของนักตัดต่อเอง** เพื่อสร้างเครือข่ายความไวรัล (Viral Network) ที่เข้าถึงผู้ชมใหม่ๆ ได้มหาศาล
+                </p>
+            </div>
+        </div>
+
+        <div id="page-hire" class="page-content max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold mb-4">🚀 บริการสำหรับผู้ว่าจ้าง (Hire Us)</h2>
+            <p class="text-xl text-gray-400 mb-10">หมดยุคจ่ายค่าโฆษณาแพงๆ แล้วลุ้นให้คนดู จ่ายเราเมื่อเห็น "ยอดวิว" หรือ "ยอดขาย" เท่านั้น</p>
+
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700 mb-10 shadow-lg">
+                <h3 class="text-2xl font-bold mb-6 text-center">กระบวนการทำงานของเรา</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div>
+                        <div class="text-4xl mb-3">📁</div>
+                        <h4 class="font-bold text-omniAccent mb-2">1. ส่งไฟล์ดิบให้เรา</h4>
+                        <p class="text-sm text-gray-400">คุณส่งลิงก์ YouTube (Podcast/Live) ให้เรา 1 คลิปยาว</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl mb-3">✂️</div>
+                        <h4 class="font-bold text-omniAccent mb-2">2. กองทัพมดลุยตัด</h4>
+                        <p class="text-sm text-gray-400">นักตัดต่อ 50+ คนของเราจะรุมดึงช็อตเด็ดๆ ไปตัดในสไตล์ของตัวเอง</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl mb-3">🔥</div>
+                        <h4 class="font-bold text-omniAccent mb-2">3. กระจายลงช่องของนักตัด</h4>
+                        <p class="text-sm text-gray-400">คลิปนับร้อยจะถูกโพสต์ลง TikTok พร้อมแท็กช่องของคุณ (Brand Awareness)</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold mb-6">แพ็กเกจการลงทุน (Performance Pricing)</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-blue-500 transition">
+                    <h4 class="text-xl font-bold mb-2">👁️ Pay-per-View Model</h4>
+                    <p class="text-gray-400 text-sm mb-6">เหมาะสำหรับสร้าง Personal Branding / Podcast</p>
+                    <div class="text-3xl font-bold text-blue-400 mb-6">฿100 <span class="text-lg text-gray-500 font-normal">/ 1,000 วิวออร์แกนิค</span></div>
+                    <ul class="text-sm text-gray-300 space-y-2 mb-8">
+                        <li>✔️ ไม่มียอดวิว ไม่ต้องจ่ายเงิน</li>
+                        <li>✔️ ได้คลิปหลากหลายสไตล์</li>
+                        <li>✔️ สร้าง Brand Awareness รวดเร็ว</li>
+                    </ul>
+                    <button class="w-full bg-slate-700 text-white font-bold py-3 rounded-xl">ติดต่อแอดมิน (LINE OA)</button>
+                </div>
+                
+                <div class="bg-slate-800 p-8 rounded-2xl border border-omniAccent relative shadow-[0_0_15px_rgba(132,204,22,0.15)]">
+                    <div class="absolute top-0 right-0 bg-omniAccent text-slate-900 text-xs font-bold px-3 py-1 rounded-bl-lg">ขายดีสุด</div>
+                    <h4 class="text-xl font-bold mb-2">🛍️ Affiliate (UGC) Model</h4>
+                    <p class="text-gray-400 text-sm mb-6">เหมาะสำหรับร้านค้า TikTok Shop / Shopee</p>
+                    <div class="text-3xl font-bold text-omniAccent mb-6">15% <span class="text-lg text-gray-500 font-normal">/ ค่าคอมมิชชันยอดขาย</span></div>
+                    <ul class="text-sm text-gray-300 space-y-2 mb-8">
+                        <li>✔️ ส่งสินค้าฟรีให้นักรีวิวของเรา</li>
+                        <li>✔️ จ่ายค่าจ้างเมื่อเกิดยอดขายเท่านั้น</li>
+                        <li>✔️ นักรีวิวแปะตะกร้าช่องตัวเองทั้งหมด</li>
+                    </ul>
+                    <button class="w-full bg-omniAccent text-slate-900 font-bold py-3 rounded-xl hover:bg-lime-500 transition">ติดต่อแอดมิน (LINE OA)</button>
                 </div>
             </div>
         </div>
 
         <div id="page-jobs" class="page-content max-w-5xl mx-auto">
-            <h2 class="text-3xl font-bold mb-2">📋 บอร์ดรับงาน (Available Jobs)</h2>
-            <p class="text-gray-400 mb-8">คลิกปุ่ม "รับงานนี้" เพื่อล็อกโควต้างานของคุณ (ระบบจะแจ้งเตือนไปที่แอดมิน)</p>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="job-card bg-slate-800 p-6 rounded-2xl border border-slate-700 relative transition-all">
-                    <div class="absolute top-4 right-4 bg-omniAccent text-slate-900 text-xs font-bold px-3 py-1 rounded-full">ว่าง</div>
-                    <h3 class="text-xl font-bold text-white mb-2">⚽ ตัดไฮไลท์ วิเคราะห์ฟุตบอล</h3>
-                    <p class="text-gray-400 text-sm mb-4 h-10">บรีฟ: ช่อง Prime90 คัดจังหวะวิจารณ์แมนยูแบบเดือดๆ ใส่ซับเด้งๆ 30 วินาที</p>
-                    <div class="flex justify-between items-center mb-4 p-3 bg-slate-900 rounded-lg border border-slate-700">
-                        <span class="text-sm text-gray-400">เรทจ่าย:</span>
-                        <span class="text-omniAccent font-bold">💰 50฿ / 1k วิว</span>
-                    </div>
-                    <button onclick="claimJob('ตัดไฮไลท์ วิเคราะห์ฟุตบอล', this)" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-4 rounded-xl transition">
-                        กดรับงานนี้
-                    </button>
-                </div>
-
-                <div class="job-card bg-slate-800 p-6 rounded-2xl border border-slate-700 relative transition-all">
-                    <div class="absolute top-4 right-4 bg-omniAccent text-slate-900 text-xs font-bold px-3 py-1 rounded-full">ว่าง</div>
-                    <h3 class="text-xl font-bold text-white mb-2">🎙️ ตัด Podcast โค้ชการลงทุน</h3>
-                    <p class="text-gray-400 text-sm mb-4 h-10">บรีฟ: คัดจังหวะสอน Mindset หาเงิน ฮุค 3 วินาทีแรกต้องดึงคนให้อยู่</p>
-                    <div class="flex justify-between items-center mb-4 p-3 bg-slate-900 rounded-lg border border-slate-700">
-                        <span class="text-sm text-gray-400">เรทจ่าย:</span>
-                        <span class="text-omniAccent font-bold">💰 30฿ / 1k วิว</span>
-                    </div>
-                    <button onclick="claimJob('ตัด Podcast โค้ชการลงทุน', this)" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-4 rounded-xl transition">
-                        กดรับงานนี้
-                    </button>
-                </div>
-            </div>
+            <h2 class="text-3xl font-bold mb-4">📋 บอร์ดรับงานสำหรับ Clippers</h2>
+             <p class="text-gray-400 mb-8">ระบบยังไม่มีงานเข้าในขณะนี้ (รออัปเดต)</p>
         </div>
 
         <div id="page-rules" class="page-content max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold mb-6">⚖️ กติกาและโครงสร้างรายได้</h2>
-            <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 mb-6">
-                <h3 class="text-xl font-bold text-omniAccent mb-4">💰 โครงสร้างการจ่ายเงิน (Performance-based)</h3>
-                <ul class="list-disc list-inside text-gray-300 space-y-3">
-                    <li>ยอดวิว <strong class="text-white">1,000 วิว</strong> = รับตามเรทที่ระบุในการ์ดงาน (เช่น 30-50 บาท)</li>
-                    <li>ยอดวิว <strong class="text-white">10,000 วิว</strong> = x10 จากเรทตั้งต้น</li>
-                    <li>ยอดวิว <strong class="text-white">100,000 วิว</strong> = x100 จากเรทตั้งต้น (ไม่มีเพดานจำกัด!)</li>
-                    <li class="text-red-400 text-sm mt-2">*หมายเหตุ: นับเฉพาะยอดวิวแบบออร์แกนิค (Organic Views) ภายใน 7 วันหลังโพสต์</li>
-                </ul>
-            </div>
-            
-            <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700">
-                <h3 class="text-xl font-bold text-red-500 mb-4">🚫 กฎเหล็ก (ห้ามฝ่าฝืน)</h3>
-                <ul class="list-disc list-inside text-gray-300 space-y-3">
-                    <li>ห้ามปั๊มยอดวิวด้วยโปรแกรม หากตรวจพบแบน ID และงดจ่ายเงินทุกกรณี</li>
-                    <li>ต้องใส่ลายน้ำ (Watermark) หรือแท็กบัญชีลูกค้า ตามที่บรีฟงานระบุไว้เสมอ</li>
-                    <li>ห้ามนำไฟล์งานของลูกค้าไปใช้ประโยชน์ส่วนตัวในช่องทางอื่น</li>
-                </ul>
-            </div>
-        </div>
-
-        <div id="page-submit" class="page-content max-w-3xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-4">✅ ส่งหลักฐานเพื่อรับเงิน</h2>
-            <p class="text-gray-400 mb-8">เมื่อยอดวิวของคุณถึงเป้าหมาย กรุณากดปุ่มด้านล่างเพื่อส่งลิงก์คลิปและภาพแคปหน้าจอหลักฐานยอดวิว</p>
-            
-            <div class="bg-slate-800 p-10 rounded-2xl border border-slate-700">
-                <div class="text-6xl mb-6">💸</div>
-                <h3 class="text-2xl font-bold mb-4">ฟอร์มส่งมอบงานและเลขบัญชี</h3>
-                <p class="text-gray-400 mb-6 text-sm">ระบบจะพาคุณไปยังหน้า Google Form เพื่ออัปโหลดรูปภาพหลักฐานอย่างปลอดภัย</p>
-                <a href="#" class="inline-block bg-omniAccent hover:bg-lime-500 text-slate-900 font-bold py-4 px-10 rounded-xl transition text-lg shadow-[0_0_15px_rgba(132,204,22,0.5)]">
-                    📝 คลิกเพื่อกรอกฟอร์มรับเงิน
-                </a>
-            </div>
+             <h2 class="text-3xl font-bold mb-4">⚖️ กติกาการทำงาน</h2>
         </div>
 
     </main>
 
     <script>
-        // ฟังก์ชันสลับหน้าเว็บ (SPA Routing)
         function switchPage(pageId) {
-            // 1. ซ่อนทุกหน้า
-            document.querySelectorAll('.page-content').forEach(page => {
-                page.classList.remove('active');
-            });
-            // 2. เอาไฮไลต์เมนูออกทั้งหมด
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            // 3. แสดงหน้าที่เลือก
-            document.getElementById('page-' + pageId).classList.add('active');
-            // 4. ไฮไลต์เมนูที่เลือก
-            document.getElementById('nav-' + pageId).classList.add('active');
-        }
-
-        // ฟังก์ชันกดปุ่มรับงาน
-        function claimJob(jobTitle, btnElement) {
-            let userName = prompt(`👇 ยืนยันการรับงาน: "${jobTitle}"\n\nกรุณากรอก ชื่อเล่น หรือ Discord ID ของคุณ:`);
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             
-            if (userName && userName.trim() !== "") {
-                btnElement.innerHTML = "✅ คุณรับงานนี้แล้ว";
-                btnElement.classList.replace('bg-blue-600', 'bg-slate-600');
-                btnElement.classList.replace('hover:bg-blue-500', 'text-gray-300');
-                btnElement.disabled = true;
-
-                alert(`🎉 ยินดีด้วยคุณ ${userName}!\n\nคุณได้รับงาน "${jobTitle}" แล้ว\nคลิกปุ่ม OK เพื่อเริ่มงานได้เลย!`);
-                
-                // (เดี๋ยวเราจะใส่โค้ดเด้งเข้า LINE ตรงนี้ทีหลัง)
-            }
+            document.getElementById('page-' + pageId).classList.add('active');
+            
+            let navItem = document.getElementById('nav-' + pageId);
+            if(navItem) navItem.classList.add('active');
         }
     </script>
 </body>
