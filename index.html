@@ -1,81 +1,126 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniVert - The #1 Hub For Clipping</title>
+    <title>OmniHub - ศูนย์รวมงานตัดต่อสร้างรายได้</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Kanit', sans-serif; background-color: #0f172a; color: white; }
-        .job-card:hover { transform: translateY(-5px); transition: 0.3s; }
-    </style>
-</head>
-<body class="p-6">
-
-    <div class="max-w-4xl mx-auto mt-10 text-center">
-        <h1 class="text-5xl font-bold text-blue-400 mb-2">OmniVert Hub</h1>
-        <p class="text-gray-400 text-lg">แหล่งรวมงานตัดคลิปสั้น รับงานง่าย ได้เงินชัวร์</p>
-    </div>
-
-    <div class="max-w-4xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <div class="bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700 job-card relative overflow-hidden">
-            <div class="absolute top-0 right-0 bg-green-500 text-xs font-bold px-3 py-1 rounded-bl-lg">ว่าง (Available)</div>
-            <h2 class="text-2xl font-semibold mb-2 mt-2">ตัดไฮไลท์ โค้ช A (สอนธุรกิจ)</h2>
-            <p class="text-gray-400 text-sm mb-4">บรีฟ: ตัดคลิป 1 นาที ซับไตเติ้ลตัวใหญ่ จังหวะฮุคดึงคนดู</p>
-            <div class="flex justify-between items-center mt-4">
-                <span class="text-green-400 font-bold text-lg">💰 30 บาท / 1k วิว</span>
-                <button onclick="claimJob('ตัดไฮไลท์ โค้ช A', this)" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition">
-                    รับงานนี้
-                </button>
-            </div>
-        </div>
-
-        <div class="bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-700 job-card relative overflow-hidden">
-            <div class="absolute top-0 right-0 bg-green-500 text-xs font-bold px-3 py-1 rounded-bl-lg">ว่าง (Available)</div>
-            <h2 class="text-2xl font-semibold mb-2 mt-2">ตัดไลฟ์สด แบรนด์สกินแคร์</h2>
-            <p class="text-gray-400 text-sm mb-4">บรีฟ: คัดช็อตฮาๆ ของแม่ค้าตอนไลฟ์ ใส่เอฟเฟกต์ตลกๆ</p>
-            <div class="flex justify-between items-center mt-4">
-                <span class="text-green-400 font-bold text-lg">💰 50 บาท / 1k วิว</span>
-                <button onclick="claimJob('ตัดไลฟ์สด แบรนด์สกินแคร์', this)" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg transition">
-                    รับงานนี้
-                </button>
-            </div>
-        </div>
-
-    </div>
-
     <script>
-        function claimJob(jobName, btnElement) {
-            // 1. ถามชื่อคนกดรับงาน
-            let userName = prompt(`ยืนยันรับงาน: ${jobName}\nกรุณากรอกชื่อเล่น หรือ Discord ID ของคุณ:`);
-            
-            if (userName != null && userName.trim() !== "") {
-                // เปลี่ยนปุ่มเป็นสีเทาและกดไม่ได้
-                btnElement.innerText = "กำลังดำเนินการ...";
-                btnElement.disabled = true;
-                btnElement.classList.replace('bg-blue-600', 'bg-gray-500');
-
-                // 2. ส่งข้อมูลไปที่ Google Apps Script (Webhook)
-                // *** เดี๋ยวเราจะเอา URL ของ Google มาใส่ตรงนี้ในสเต็ปที่ 3 ***
-                let webhookUrl = "ใส่_URL_GOOGLE_SCRIPT_ตรงนี้"; 
-                let requestUrl = webhookUrl + "?job=" + encodeURIComponent(jobName) + "&user=" + encodeURIComponent(userName);
-
-                fetch(requestUrl, { mode: 'no-cors' })
-                    .then(() => {
-                        alert(`✅ รับงานสำเร็จ!\nคุณ ${userName} ได้รับงาน ${jobName} แล้ว\nระบบได้แจ้งเตือนไปยังแอดมินเรียบร้อย`);
-                        btnElement.innerText = "รับงานแล้ว";
-                    })
-                    .catch(error => {
-                        alert("เกิดข้อผิดพลาด กรุณาลองใหม่");
-                        btnElement.innerText = "รับงานนี้";
-                        btnElement.disabled = false;
-                        btnElement.classList.replace('bg-gray-500', 'bg-blue-600');
-                    });
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        omniDark: '#0f172a', // สีพื้นหลังน้ำเงินเข้ม
+                        omniAccent: '#84cc16', // สีเขียวมะนาว
+                    }
+                }
             }
         }
     </script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Kanit', sans-serif; background-color: #0f172a; }
+        /* เอฟเฟกต์การ์ดลอยขึ้นเมื่อเอาเมาส์ไปชี้ */
+        .job-card { transition: all 0.3s ease; border: 1px solid #1e293b; }
+        .job-card:hover { transform: translateY(-5px); border-color: #84cc16; box-shadow: 0 10px 20px -10px rgba(132, 204, 22, 0.3); }
+    </style>
+</head>
+<body class="text-gray-200 bg-omniDark min-h-screen p-4 md:p-8">
+
+    <header class="max-w-6xl mx-auto mb-12 text-center md:text-left md:flex justify-between items-center">
+        <div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">
+                <span class="text-omniAccent">Omni</span>Hub
+            </h1>
+            <p class="text-gray-400 text-lg">ระบบรับงานตัดคลิปสั้น สร้างรายได้ตามยอดวิว</p>
+        </div>
+        <div class="mt-4 md:mt-0 bg-slate-800 py-2 px-4 rounded-lg border border-slate-700">
+            👥 สมาชิกออนไลน์: <span class="text-omniAccent font-bold">12 คน</span>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto">
+        <div class="flex items-center mb-6">
+            <h2 class="text-2xl font-semibold text-white mr-4">📌 งานที่เปิดรับ (Available Tasks)</h2>
+            <div class="h-px bg-slate-700 flex-grow"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <div class="job-card bg-slate-800 rounded-2xl overflow-hidden relative group">
+                <div class="absolute top-4 right-4 bg-omniAccent text-slate-900 text-xs font-bold px-3 py-1 rounded-full z-10">
+                    ว่าง • รับได้เลย
+                </div>
+                
+                <div class="p-6 relative z-20">
+                    <div class="mb-4">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-omniAccent transition">✂️ ตัดไฮไลท์ โค้ชการเงิน (คลิป A)</h3>
+                        <p class="text-gray-400 text-sm line-clamp-2">บรีฟ: หาช็อตพูดเรื่อง "หนี้บัตรเครดิต" ตัดให้กระชับ 45 วิฯ ใส่ซับไตเติ้ลตัวใหญ่ เน้นฮุคแรงๆ</p>
+                    </div>
+                    
+                    <div class="bg-slate-900/50 p-3 rounded-lg mb-6 flex items-center justify-between border border-slate-700">
+                        <span class="text-sm text-gray-400">เรทจ่ายตามวิว:</span>
+                        <span class="text-omniAccent font-bold text-lg">💰 30฿ / 1k วิว</span>
+                    </div>
+
+                    <button onclick="handleClaimBtn('ตัดไฮไลท์ โค้ชการเงิน (คลิป A)', this)" class="claim-btn w-full bg-omniAccent hover:bg-[#71af13] text-slate-900 font-bold py-3 px-4 rounded-xl transition-all duration-200 transform active:scale-95 flex justify-center items-center">
+                        🚀 กดรับงานนี้ (Claim)
+                    </button>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-br from-omniAccent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+            </div>
+
+            <div class="job-card bg-slate-800 rounded-2xl overflow-hidden relative group">
+                <div class="absolute top-4 right-4 bg-omniAccent text-slate-900 text-xs font-bold px-3 py-1 rounded-full z-10">
+                    ว่าง • รับได้เลย
+                </div>
+                <div class="p-6 relative z-20">
+                    <div class="mb-4">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-omniAccent transition">🎮 ตัดช็อตฮา สตรีมเมอร์เกม</h3>
+                        <p class="text-gray-400 text-sm line-clamp-2">บรีฟ: คัดจังหวะตกใจ/หัวร้อน ใส่เอฟเฟกต์เสียงตลกๆ เน้นกลุ่มเป้าหมายเด็กวัยรุ่น</p>
+                    </div>
+                    <div class="bg-slate-900/50 p-3 rounded-lg mb-6 flex items-center justify-between border border-slate-700">
+                        <span class="text-sm text-gray-400">เรทจ่ายตามวิว:</span>
+                        <span class="text-omniAccent font-bold text-lg">💰 50฿ / 1k วิว</span>
+                    </div>
+                    <button onclick="handleClaimBtn('ตัดช็อตฮา สตรีมเมอร์เกม', this)" class="claim-btn w-full bg-omniAccent hover:bg-[#71af13] text-slate-900 font-bold py-3 px-4 rounded-xl transition-all duration-200 transform active:scale-95 flex justify-center items-center">
+                        🚀 กดรับงานนี้ (Claim)
+                    </button>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-br from-omniAccent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-0"></div>
+            </div>
+            
+            </div>
+    </main>
+
+    <footer class="max-w-6xl mx-auto mt-16 py-8 text-center text-gray-500 text-sm border-t border-slate-800">
+        <p>© 2026 OmniAgency Official. ระบบภายในสำหรับทีมงานเท่านั้น</p>
+    </footer>
+
+    <script>
+        // ฟังก์ชันเมื่อกดปุ่มรับงาน
+        function handleClaimBtn(jobTitle, btnElement) {
+            // 1. เด้งหน้าต่างถามชื่อ
+            let userName = prompt(`👇 ยืนยันการรับงาน: "${jobTitle}"\n\nกรุณากรอก ชื่อเล่น หรือ Discord ID ของคุณ:`);
+            
+            // 2. ถ้ามีการกรอกชื่อและกด OK
+            if (userName && userName.trim() !== "") {
+                // เปลี่ยนสถานะปุ่มให้รู้ว่ารับไปแล้ว
+                btnElement.innerHTML = "✅ รับงานแล้ว (รอดำเนินการ)";
+                btnElement.classList.remove('bg-omniAccent', 'hover:bg-[#71af13]', 'text-slate-900');
+                btnElement.classList.add('bg-slate-600', 'text-gray-300', 'cursor-not-allowed');
+                btnElement.disabled = true;
+
+                // แจ้งเตือนผู้ใช้ (ในอนาคตตรงนี้จะส่งข้อมูลไปหาคุณ)
+                alert(`🎉 ยินดีด้วยคุณ ${userName}!\n\nคุณได้รับงาน "${jobTitle}" เรียบร้อยแล้ว\nกรุณาเริ่มงานได้เลย!`);
+                
+                // --- พื้นที่สำหรับเชื่อมต่อระบบแจ้งเตือน LINE (ในสเต็ปต่อไป) ---
+                // sendToLine(jobTitle, userName); 
+                // -----------------------------------------------------
+            }
+        }
+    </script>
+
 </body>
 </html>
-
