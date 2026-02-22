@@ -183,5 +183,72 @@
             if(navItem) navItem.classList.add('active');
         }
     </script>
+        <script>
+        // --- ส่วนที่ 1: ระบบโหลดงานจาก Google Sheets ---
+        const API_URL = "ใส่_URL_ที่ก๊อปมา_ตรงนี้";
+
+        async function loadJobs() {
+            const container = document.getElementById('job-list-container');
+            try {
+                let response = await fetch(API_URL);
+                let jobs = await response.json();
+                
+                container.innerHTML = ''; // ล้างข้อความ 'กำลังโหลด' ออก
+                
+                if(jobs.length === 0) {
+                    container.innerHTML = '<p class="text-gray-400 col-span-2">ขณะนี้ยังไม่มีงานเปิดรับครับ รอแอดมินอัปเดตนะ!</p>';
+                    return;
+                }
+
+                // สร้างการ์ดงานตามจำนวนแถวใน Google Sheets
+                jobs.forEach(job => {
+                    let card = `
+                    <div class="job-card bg-slate-800 p-6 rounded-2xl border border-slate-700 relative transition-all">
+                        <div class="absolute top-4 right-4 bg-omniAccent text-slate-900 text-xs font-bold px-3 py-1 rounded-full">ว่าง</div>
+                        <h3 class="text-xl font-bold text-white mb-2">${job.title}</h3>
+                        <p class="text-gray-400 text-sm mb-4 h-10">${job.brief}</p>
+                        <div class="flex justify-between items-center mb-4 p-3 bg-slate-900 rounded-lg border border-slate-700">
+                            <span class="text-sm text-gray-400">เรทจ่าย:</span>
+                            <span class="text-omniAccent font-bold">💰 ${job.price}฿ / 1k วิว</span>
+                        </div>
+                        <button onclick="claimJob('${job.title}', this)" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-4 rounded-xl transition">
+                            กดรับงานนี้
+                        </button>
+                    </div>`;
+                    container.innerHTML += card;
+                });
+            } catch (error) {
+                container.innerHTML = '<p class="text-red-400">โหลดข้อมูลไม่สำเร็จ กรุณารีเฟรชหน้าเว็บอีกครั้ง</p>';
+            }
+        }
+
+        // --- ส่วนที่ 2: ระบบเมนูและอื่นๆ (ของเดิม) ---
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById('page-' + pageId).classList.add('active');
+            let navItem = document.getElementById('nav-' + pageId);
+            if(navItem) navItem.classList.add('active');
+
+            // ถ้าผู้ใช้กดเข้าหน้า Jobs ให้โหลดข้อมูลใหม่ทุกครั้ง
+            if(pageId === 'jobs') {
+                document.getElementById('job-list-container').innerHTML = '<div class="text-white bg-slate-800 p-6 rounded-xl border border-slate-700">กำลังอัปเดตงาน... ⏳</div>';
+                loadJobs();
+            }
+        }
+
+        function claimJob(jobTitle, btnElement) {
+            let userName = prompt(`👇 ยืนยันการรับงาน: "${jobTitle}"\n\nกรุณากรอก ชื่อเล่น หรือ Discord ID ของคุณ:`);
+            if (userName && userName.trim() !== "") {
+                btnElement.innerHTML = "✅ คุณรับงานนี้แล้ว";
+                btnElement.classList.replace('bg-blue-600', 'bg-slate-600');
+                btnElement.classList.replace('hover:bg-blue-500', 'text-gray-300');
+                btnElement.disabled = true;
+                alert(`🎉 ยินดีด้วยคุณ ${userName}!\n\nคุณได้รับงาน "${jobTitle}" แล้ว\n(ระบบจะเชื่อม LINE ในอนาคต)`);
+            }
+        }
+    </script>
+
 </body>
 </html>
